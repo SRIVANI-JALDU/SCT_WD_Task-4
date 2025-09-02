@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillCraft To-Do App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Confirmation Modal -->
+    <div class="modal hidden" id="confirmModal">
+        <div class="modal-content">
+            <h3>Confirm Action</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn--secondary" id="cancelBtn">Cancel</button>
+                <button type="button" class="btn btn--primary" id="confirmBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">SkillCraft To-Do App</h1>
+            <p class="app-subtitle">Organize your tasks efficiently</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Task Input Section -->
+            <section class="task-input-section">
+                <div class="input-container">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        class="form-control task-input" 
+                        placeholder="Add a new task..." 
+                        maxlength="200"
+                        aria-label="New task input"
+                    >
+                    <select id="prioritySelect" class="form-control priority-select" aria-label="Task priority">
+                        <option value="low">Low Priority</option>
+                        <option value="medium" selected>Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                    <button type="button" class="btn btn--primary add-btn" id="addTaskBtn" aria-label="Add task">
+                        <span class="btn-text">Add Task</span>
+                        <span class="btn-icon">+</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Task Stats -->
+            <section class="task-stats">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalTasks">0</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="activeTasks">0</span>
+                        <span class="stat-label">Active</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="completedTasks">0</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task Filters -->
+            <section class="task-filters">
+                <div class="filter-buttons">
+                    <button type="button" class="btn btn--outline filter-btn active" data-filter="all">All Tasks</button>
+                    <button type="button" class="btn btn--outline filter-btn" data-filter="active">Active</button>
+                    <button type="button" class="btn btn--outline filter-btn" data-filter="completed">Completed</button>
+                </div>
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="form-control search-input" 
+                        placeholder="Search tasks..."
+                        aria-label="Search tasks"
+                    >
+                </div>
+            </section>
+
+            <!-- Task List -->
+            <section class="task-list-section">
+                <div id="taskList" class="task-list" role="list">
+                    <!-- Tasks will be dynamically inserted here -->
+                </div>
+                
+                <!-- Empty State -->
+                <div class="empty-state hidden" id="emptyState">
+                    <div class="empty-icon">📝</div>
+                    <h3>No tasks yet</h3>
+                    <p>Add your first task above to get started!</p>
+                </div>
+            </section>
+
+            <!-- Task Actions -->
+            <section class="task-actions">
+                <div class="action-buttons">
+                    <button type="button" class="btn btn--secondary" id="clearCompletedBtn">
+                        Clear Completed
+                    </button>
+                    <div class="bulk-actions">
+                        <button type="button" class="btn btn--outline" id="exportBtn">Export</button>
+                        <button type="button" class="btn btn--outline" id="importBtn">Import</button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2025 SkillCraft Technology. All rights reserved.</p>
+            <p class="keyboard-hints">
+                <span>💡 Tips: Press Enter to add tasks, double-click to edit, drag to reorder</span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Task Edit Form Template (hidden) -->
+    <template id="taskEditTemplate">
+        <div class="task-edit-form">
+            <input type="text" class="form-control edit-input" maxlength="200">
+            <div class="edit-actions">
+                <button type="button" class="btn btn--sm btn--primary save-edit">Save</button>
+                <button type="button" class="btn btn--sm btn--secondary cancel-edit">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
